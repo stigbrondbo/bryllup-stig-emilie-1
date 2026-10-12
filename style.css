@@ -1,1164 +1,412 @@
-/*
-  ==========================================
-  BRYLLUPSSIDE – CSS
-  ==========================================
-*/
+/* Emilie & Stig – bryllupsnettside. Bygget på designsystemet «Emilie & Stig». */
 
+@font-face { font-family: "Great Vibes"; src: url("fonts/GreatVibes-Regular.woff2") format("woff2"); font-weight: 400; font-display: swap; }
+@font-face { font-family: "Cormorant SC"; src: url("fonts/CormorantSC-Medium.woff2") format("woff2"); font-weight: 500; font-display: swap; }
+@font-face { font-family: "Cormorant SC"; src: url("fonts/CormorantSC-SemiBold.woff2") format("woff2"); font-weight: 600; font-display: swap; }
+@font-face { font-family: "Cormorant Garamond"; src: url("fonts/CormorantGaramond-Regular.woff2") format("woff2"); font-weight: 400; font-display: swap; }
+@font-face { font-family: "Cormorant Garamond"; src: url("fonts/CormorantGaramond-Italic.woff2") format("woff2"); font-weight: 400; font-style: italic; font-display: swap; }
+@font-face { font-family: "Cormorant Garamond"; src: url("fonts/CormorantGaramond-SemiBold.woff2") format("woff2"); font-weight: 600; font-display: swap; }
 
-/*
-  ------------------------------------------
-  1. FARGER OG GJENBRUKBARE VERDIER
-  ------------------------------------------
-
-  CSS-variabler gjør det enkelt å endre farger
-  senere. Endrer du for eksempel --accent,
-  endres aksentfargen overalt på nettsiden.
-*/
 :root {
-  /* Bakgrunnsfarger */
-  --background: #fffaf6;
-  --surface: #ffffff;
-  --surface-soft: #f7eee8;
-
-  /* Tekstfarger */
-  --text: #342d2b;
-  --muted-text: #746a66;
-
-  /* Hovedfarger for detaljer, knapper og lenker */
-  --accent: #a66a72;
-  --accent-dark: #7f4d55;
-  --accent-light: #ecd7d3;
-
-  /* Andre nyttige farger */
-  --border: #eadbd3;
-  --white: #ffffff;
-
-  /*
-    Skrifter:
-    Georgia er en klassisk serif-skrift som passer
-    godt på overskrifter på en bryllupsside.
-
-    Arial er en enkel, lettlest skrift til vanlig tekst.
-  */
-  --font-body: Arial, Helvetica, sans-serif;
-  --font-heading: Georgia, "Times New Roman", serif;
-
-  /* Maks bredde på innholdet på store skjermer */
-  --max-width: 1120px;
-
-  /* Samme animasjonshastighet brukt flere steder */
-  --transition: 200ms ease;
-}
-
-
-/*
-  ------------------------------------------
-  2. GRUNNINNSTILLINGER
-  ------------------------------------------
-*/
-
-/*
-  Gjør at padding og border regnes med i bredde/høyde.
-  Dette gjør det mye enklere å kontrollere størrelser.
-*/
-* {
-  box-sizing: border-box;
-}
-
-/* Myk scrolling når man klikker på lenker som #rsvp */
-html {
-  scroll-behavior: smooth;
-}
-
-/* Standard stil for hele nettsiden */
-body {
-  margin: 0;
-  background: var(--background);
-  color: var(--text);
-  font-family: var(--font-body);
-  font-size: 1rem;
-  line-height: 1.65;
-}
-
-/*
-  Klassen legges på body med JavaScript når mobilmenyen
-  er åpen. Da hindrer vi at siden scroller i bakgrunnen.
-*/
-body.menu-open {
-  overflow: hidden;
-}
-
-/* Sørger for at bilder aldri blir bredere enn skjermen */
-img {
-  max-width: 100%;
-}
-
-/* Lenker arver tekstfargen fra elementet rundt */
-a {
-  color: inherit;
-}
-
-/*
-  Skjemaelementer bruker samme skrifttype som resten
-  av nettsiden i stedet for nettleserens standardfont.
-*/
-button,
-input,
-textarea,
-select {
-  font: inherit;
-}
-
-/* Musepekeren blir en hånd når man holder over knapper */
-button {
-  cursor: pointer;
-}
-
-
-/*
-  ------------------------------------------
-  3. FELLES LAYOUT-KLASSER
-  ------------------------------------------
-*/
-
-/*
-  .container holder innholdet sentrert og hindrer at
-  tekst og kort blir altfor brede på store skjermer.
-
-  calc(100% - 2rem) gir 1rem luft på hver side på mobil.
-*/
-.container {
-  width: min(var(--max-width), calc(100% - 2rem));
-  margin: 0 auto;
-}
-
-/* Brukes på seksjoner med mye tekst, som velkommen og RSVP */
-.narrow {
-  max-width: 720px;
-}
-
-/* Standard luft over og under hver seksjon */
-.section {
-  padding: 7rem 0;
-}
-
-/* Alternativ, litt mørkere bakgrunn på enkelte seksjoner */
-.section-soft {
-  background: var(--surface-soft);
-}
-
-
-/*
-  ------------------------------------------
-  4. HERO / FORSIDEN
-  ------------------------------------------
-*/
-
-.hero {
-  position: relative;
-  min-height: 100svh;
-  overflow: hidden;
-
-  color: var(--white);
-
-  /*
-    Her kan du bruke et eget bilde:
-    1. Legg bildet i mappen "bilder", for eksempel "hero.jpg"
-    2. Legg inn denne linjen mellom linear-gradient og fargen:
-       url("bilder/hero.jpg") center / cover no-repeat,
-
-    Uten bilde vises fargen #805b5c.
-
-    Linear-gradient gjør bildet mørkere, slik at den
-    hvite teksten blir lettere å lese.
-  */
-  background:
-    linear-gradient(
-      135deg,
-      #3f2728a8,
-      rgba(119, 72, 78, 0.44)
-    ),
-    #805b5c;
-}
-
-/*
-  Store dekorative sirkler i bakgrunnen.
-  ::before og ::after lager ekstra elementer uten at
-  du trenger å legge dem i HTML.
-*/
-.hero::before,
-.hero::after {
-  position: absolute;
-  border: 1px solid #ffffff38;
-  border-radius: 50%;
-  content: "";
-  pointer-events: none;
-}
-
-.hero::before {
-  width: 430px;
-  height: 430px;
-  top: -205px;
-  left: -155px;
-}
-
-.hero::after {
-  width: 600px;
-  height: 600px;
-  right: -300px;
-  bottom: -420px;
-}
-
-
-/*
-  ------------------------------------------
-  5. NAVIGASJON
-  ------------------------------------------
-*/
-
-.navigation {
-  position: relative;
-  z-index: 2;
-
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-
-  padding-top: 1.5rem;
-}
-
-/* Liten logo øverst til venstre */
-.logo {
-  font-family: var(--font-heading);
-  font-size: 1.3rem;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  text-decoration: none;
-}
-
-/* Gir &-tegnet en lysere/feminin aksentfarge */
-.logo span,
-.hero h1 span,
-.footer-names span {
-  color: #f6d9d4;
-  font-style: italic;
-}
-
-/* Menylenker på store skjermer */
-.nav-links {
-  display: flex;
-  gap: 1.7rem;
-}
-
-.nav-links a {
-  position: relative;
-  font-size: 0.9rem;
-  font-weight: 500;
-  text-decoration: none;
-}
-
-/*
-  Lager en liten linje under menylenken ved hover.
-  Linjen starter med bredde 0 og vokser til 100%.
-*/
-.nav-links a::after {
-  position: absolute;
-  bottom: -0.35rem;
-  left: 0;
-
-  width: 0;
-  height: 1px;
-
-  background: currentColor;
-  content: "";
-
-  transition: width var(--transition);
-}
-
-.nav-links a:hover::after,
-.nav-links a:focus-visible::after {
-  width: 100%;
-}
-
-/*
-  Hamburgerknappen er skjult på store skjermer.
-  Den vises i media query nederst for mobil.
-*/
-.menu-button {
-  display: none;
-
-  width: 45px;
-  height: 45px;
-  padding: 0.7rem;
-
-  border: 1px solid #ffffff99;
-  border-radius: 50%;
-  background: transparent;
-  color: var(--white);
-}
-
-.menu-button span {
-  display: block;
-  width: 100%;
-  height: 1px;
-  margin: 5px 0;
-
-  background: currentColor;
-
-  transition:
-    transform var(--transition),
-    opacity var(--transition);
-}
-
-
-/*
-  ------------------------------------------
-  6. INNHOLD I HERO-SEKSJONEN
-  ------------------------------------------
-*/
-
-.hero-content {
-  position: relative;
-  z-index: 1;
-
-  display: grid;
-  min-height: calc(100svh - 76px);
-  place-content: center;
-  justify-items: center;
-
-  padding: 5rem 1rem 6rem;
-  text-align: center;
-}
-
-/*
-  Liten tekst over overskrifter.
-  F.eks. "Vi gifter oss" eller "Praktisk informasjon".
-*/
-.eyebrow {
-  margin: 0 0 0.8rem;
-
-  color: #f8e6e1;
-  font-size: 0.72rem;
-  font-weight: 700;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-}
-
-/* Mørk variant som brukes på lyse bakgrunner */
-.eyebrow.dark {
-  color: var(--accent-dark);
-}
-
-.hero h1,
-h2,
-h3 {
-  font-family: var(--font-heading);
-}
-
-/* Hovedtittelen med navnene til brudeparet */
-.hero h1 {
-  max-width: 900px;
-  margin: 0;
-
-  /*
-    clamp(minimum, fleksibel størrelse, maksimum)
-    gjør at tittelen automatisk blir mindre på mobil
-    og større på store skjermer.
-  */
-  font-size: clamp(3.3rem, 10vw, 7rem);
-  font-weight: 500;
-  line-height: 1.08;
-}
-
-.hero-date {
-  margin: 1.5rem 0 0;
-  font-size: clamp(1.05rem, 2vw, 1.3rem);
-  letter-spacing: 0.04em;
-}
-
-/* Den lille blomster-/ornamentteksten: ❦ */
-.ornament {
-  margin: 1.2rem 0;
-  color: #f7d7d1;
-  font-family: var(--font-heading);
-  font-size: 2rem;
-}
-
-.dark-ornament {
-  color: var(--accent);
-}
-
-.hero-location {
-  margin: 0 0 2rem;
-  color: rgba(255, 255, 255, 0.9);
-}
-
-
-/*
-  ------------------------------------------
-  7. KNAPPER OG FOKUS
-  ------------------------------------------
-*/
-
-.button {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-
-  min-height: 52px;
-  padding: 0.85rem 1.5rem;
-
-  border: 1px solid transparent;
-  border-radius: 999px;
-
-  font-weight: 700;
-  text-decoration: none;
-
-  transition:
-    transform var(--transition),
-    background var(--transition),
-    color var(--transition),
-    border-color var(--transition);
-}
-
-/* Knappen løfter seg forsiktig når brukeren holder over */
-.button:hover {
-  transform: translateY(-3px);
-}
-
-/*
-  Synlig fokusmarkering for tastaturnavigasjon.
-  Dette er viktig for tilgjengelighet.
-*/
-.button:focus-visible,
-a:focus-visible,
-input:focus-visible,
-textarea:focus-visible,
-select:focus-visible {
-  outline: 3px solid #c88b91;
-  outline-offset: 3px;
-}
-
-/* Lys knapp brukt i hero */
-.button-light {
-  background: var(--white);
-  color: var(--accent-dark);
-}
-
-.button-light:hover {
-  background: #faece8;
-}
-
-/* Mørk knapp brukt til å sende RSVP-skjemaet */
-.button-dark {
-  width: 100%;
-  border: 0;
-  background: var(--accent-dark);
-  color: var(--white);
-}
-
-.button-dark:hover {
-  background: #61373e;
-}
-
-
-/*
-  ------------------------------------------
-  8. NEDTELLING
-  ------------------------------------------
-*/
-
-.countdown {
-  display: flex;
-  justify-content: center;
-  gap: 1rem;
-  margin-top: 3rem;
-}
-
-/* Hver enkelt boks i nedtellingen */
-.countdown-item {
-  display: grid;
-  width: 92px;
-  min-height: 86px;
-  place-content: center;
-
-  border: 1px solid rgba(255, 255, 255, 0.35);
-  background: rgba(255, 255, 255, 0.09);
-
-  /*
-    Gjør innholdet bak boksen litt uskarpt.
-    Enkelte eldre nettlesere støtter ikke dette,
-    men boksen fungerer fortsatt uten.
-  */
-  backdrop-filter: blur(4px);
-}
-
-.countdown-item strong {
-  font-family: var(--font-heading);
-  font-size: 1.8rem;
-  font-weight: 500;
-  line-height: 1;
-}
-
-.countdown-item span {
-  margin-top: 0.35rem;
-  font-size: 0.7rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-
-
-/*
-  ------------------------------------------
-  9. "SCROLL NED"-LENKE I HERO
-  ------------------------------------------
-*/
-
-.scroll-hint {
-  position: absolute;
-  z-index: 2;
-  bottom: 1.5rem;
-  left: 50%;
-
-  display: grid;
-  justify-items: center;
-
-  color: var(--white);
-  font-size: 0.7rem;
-  letter-spacing: 0.12em;
-  text-decoration: none;
-  text-transform: uppercase;
-
-  transform: translateX(-50%);
-}
-
-.scroll-arrow {
-  margin-top: 0.2rem;
-  font-size: 1.2rem;
-
-  /* Pil ned beveger seg forsiktig opp og ned */
-  animation: bounce 1.7s infinite;
-}
-
-
-/*
-  ------------------------------------------
-  10. VELKOMSTTEKST OG OVERSKRIFTER
-  ------------------------------------------
-*/
-
-.welcome {
-  text-align: center;
-}
-
-.welcome h2,
-.section-heading h2 {
-  margin: 0;
-  font-size: clamp(2.2rem, 5vw, 3.5rem);
-  font-weight: 500;
-  line-height: 1.15;
-}
-
-.welcome p:not(.eyebrow) {
-  color: var(--muted-text);
-}
-
-.section-heading {
-  margin-bottom: 3.5rem;
-  text-align: center;
-}
-
-.section-intro {
-  max-width: 570px;
-  margin: 1rem auto 0;
-  color: var(--muted-text);
-}
-
-
-/*
-  ------------------------------------------
-  11. PROGRAM / TIDSLINJE
-  ------------------------------------------
-*/
-
-.timeline {
-  max-width: 760px;
-  margin: 0 auto;
-}
-
-/*
-  Første kolonne er klokkeslett.
-  Andre kolonne er informasjon om hendelsen.
-*/
-.timeline-item {
-  display: grid;
-  grid-template-columns: 110px 1fr;
-  gap: 2.5rem;
-
-  padding: 1.5rem 0;
-  border-bottom: 1px solid var(--border);
-}
-
-.timeline-item:first-child {
-  border-top: 1px solid var(--border);
-}
-
-.timeline-item time {
-  color: var(--accent-dark);
-  font-family: var(--font-heading);
-  font-size: 1.5rem;
-}
-
-.timeline-item h3 {
-  margin: 0 0 0.3rem;
-  font-size: 1.45rem;
-  font-weight: 600;
-}
-
-.timeline-item p {
-  margin: 0;
-  color: var(--muted-text);
-}
-
-
-/*
-  ------------------------------------------
-  12. PRAKTISK INFORMASJON – KORT
-  ------------------------------------------
-*/
-
-.info-grid {
-  display: grid;
-
-  /* Fire kort ved siden av hverandre på store skjermer */
-  grid-template-columns: repeat(4, 1fr);
-
-  gap: 1rem;
-}
-
-.info-card {
-  min-height: 280px;
-  padding: 2rem;
-
-  background: var(--surface);
-  border: 1px solid var(--border);
-}
-
-.info-icon {
-  color: var(--accent);
-  font-family: var(--font-heading);
-  font-size: 2rem;
-}
-
-.info-card h3 {
-  margin: 1rem 0 0.4rem;
-  font-size: 1.45rem;
-  font-weight: 600;
-}
-
-.info-card p {
-  margin: 0;
-  color: var(--muted-text);
-  font-size: 0.94rem;
-}
-
-.info-card a {
-  display: inline-block;
-  margin-top: 1rem;
-
-  color: var(--accent-dark);
-  font-size: 0.9rem;
-  font-weight: 700;
-  text-decoration: none;
-}
-
-.info-card a:hover {
-  text-decoration: underline;
-}
-
-
-/*
-  ------------------------------------------
-  13. SITATSEKSJON
-  ------------------------------------------
-*/
-
-.quote-section {
-  padding: 5rem 0;
-  text-align: center;
-}
-
-blockquote {
-  margin: 0;
-}
-
-blockquote p {
-  margin: 0;
-
-  font-family: var(--font-heading);
-  font-size: clamp(1.8rem, 4vw, 2.8rem);
-  font-style: italic;
-  line-height: 1.35;
-}
-
-
-/*
-  ------------------------------------------
-  14. RSVP-SKJEMA
-  ------------------------------------------
-*/
-
-.rsvp {
-  background: var(--background);
-}
-
-/*
-  Skjemaet ligger som et hvitt "kort" på siden.
-  clamp gjør at lufta inni blir mindre på mobil.
-*/
-form {
-  padding: clamp(1.5rem, 4vw, 3rem);
-  background: var(--surface);
-  border: 1px solid var(--border);
-}
-
-.form-group {
-  margin: 0 0 1.4rem;
-  padding: 0;
-  border: 0;
-}
-
-label,
-legend {
-  display: block;
-  margin-bottom: 0.55rem;
-  font-size: 0.93rem;
-  font-weight: 700;
-}
-
-/* Rødlig stjerne ved obligatoriske felt */
-label span[aria-hidden="true"],
-legend span[aria-hidden="true"] {
-  color: var(--accent-dark);
-}
-
-/* Litt svakere tekst ved "(valgfritt)" */
-.optional {
-  color: var(--muted-text);
-  font-weight: 400;
-}
-
-/*
-  Felles design for tekstfelt, tekstområder
-  og nedtrekksmenyer.
-*/
-input[type="text"],
-textarea,
-select {
-  width: 100%;
-  padding: 0.85rem 0.95rem;
-
-  border: 1px solid var(--border);
-  border-radius: 4px;
-  outline: none;
-
-  background: #fffdfb;
-  color: var(--text);
-
-  transition:
-    border-color var(--transition),
-    box-shadow var(--transition);
-}
-
-/* Litt tydeligere kant når brukeren skriver i et felt */
-input[type="text"]:focus,
-textarea:focus,
-select:focus {
-  border-color: var(--accent);
-  box-shadow: 0 0 0 3px rgba(166, 106, 114, 0.14);
-}
-
-/* Lar brukeren endre høyden på tekstfeltet, men ikke bredden */
-textarea {
-  resize: vertical;
-}
-
-/* Radio-knappene ligger ved siden av hverandre på større skjermer */
-.radio-group {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.75rem;
-}
-
-/*
-  Hver radio-knapp er pakket inn i en label.
-  Da kan brukeren klikke på hele boksen, ikke bare
-  den lille sirkelen.
-*/
-.radio-label {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-
-  min-width: 170px;
-  margin: 0;
-  padding: 0.8rem 0.9rem;
-
-  border: 1px solid var(--border);
-  border-radius: 4px;
-
-  font-weight: 500;
-  cursor: pointer;
-}
-
-/*
-  :has() velger labelen som inneholder en valgt radio-knapp.
-  Den får da en svak bakgrunn og tydeligere kant.
-*/
-.radio-label:has(input:checked) {
-  border-color: var(--accent);
-  background: #fff6f4;
-}
-
-/* Endrer fargen på selve radio-sirkelen */
-.radio-label input {
-  accent-color: var(--accent-dark);
-}
-
-.privacy-note {
-  margin: 0 0 1.2rem;
-  color: var(--muted-text);
-  font-size: 0.8rem;
-}
-
-/*
-  Området under skjemaet der JavaScript viser:
-  - feilmeldinger
-  - vellykket innsending
-*/
-.form-status {
-  min-height: 1.5rem;
-  margin: 1rem 0 0;
-  font-weight: 700;
-  text-align: center;
-}
-
-.form-status.success {
-  color: #347052;
-}
-
-.form-status.error {
-  color: #aa3c45;
-}
-
-
-/*
-  ------------------------------------------
-  15. FOOTER
-  ------------------------------------------
-*/
-
-.footer {
-  padding: 3rem 0;
-  background: #3d2b2d;
-  color: rgba(255, 255, 255, 0.78);
-  text-align: center;
-}
-
-.footer p {
-  margin: 0.3rem 0;
-}
-
-.footer-names {
-  color: var(--white);
-  font-family: var(--font-heading);
-  font-size: 1.55rem;
-}
-
-
-/*
-  ------------------------------------------
-  16. SCROLL-ANIMASJONER
-  ------------------------------------------
-
-  JavaScript legger klassen .
-  /*
-  Ballonger og fyrverkeri ved åpning av nettsiden
-*/
-
-/* Canvaset dekker skjermen, men kan ikke klikkes på */
-#fireworks-canvas {
-  position: fixed;
-  z-index: 20;
-  inset: 0;
-
-  width: 100%;
-  height: 100%;
-
-  pointer-events: none;
-}
-
-/*
-  Ballonger blir opprettet med JavaScript inne i hero.
-  De er bare dekorasjon og skal ikke dekke innholdet.
-*/
-.opening-balloon {
-  position: absolute;
-  z-index: 0;
-  bottom: -140px;
-
-  width: 42px;
-  height: 54px;
-
-  border-radius: 50% 50% 48% 48%;
-  opacity: 0.8;
-
-  animation: balloon-float linear forwards;
-}
-
-/* Den lille "knyten" nederst på ballongen */
-.opening-balloon::before {
-  position: absolute;
-  bottom: -6px;
-  left: 50%;
-
-  width: 10px;
-  height: 10px;
-
-  background: inherit;
-  content: "";
-
-  transform: translateX(-50%) rotate(45deg);
-}
-
-/* Ballongsnoren */
-.opening-balloon::after {
-  position: absolute;
-  top: 57px;
-  left: 50%;
-
-  width: 1px;
-  height: 80px;
-
-  background: rgba(255, 255, 255, 0.55);
-  content: "";
-
-  transform: translateX(-50%);
-  transform-origin: top;
-}
-
-/*
-  Ballongen beveger seg fra under skjermen til over hero-seksjonen.
-  Litt rotasjon får bevegelsen til å føles mindre stiv.
-*/
-@keyframes balloon-float {
-  0% {
-    transform: translateY(0) rotate(-4deg);
-  }
-
-  50% {
-    transform: translateY(-55vh) rotate(5deg);
-  }
-
-  100% {
-    transform: translateY(-125vh) rotate(-3deg);
-  }
-}
-
-/*
-  Bilderamme med dobbel kant, små gullhjørner og skygge.
-*/
-.couple-photo {
-  position: absolute;
-  z-index: 1;
-  top: 50%;
-  left: clamp(1.5rem, 7vw, 8rem);
-
-  width: clamp(180px, 20vw, 310px);
-  margin: 0;
-  padding: 0.85rem;
-
-  background: #fffdf9;
-  border: 1px solid #d5b06e;
-  box-shadow:
-    0 16px 35px rgba(25, 14, 15, 0.35),
-    0 0 0 5px rgba(255, 253, 249, 0.85),
-    0 0 0 6px rgba(213, 176, 110, 0.45);
-
-  transform: translateY(-42%) rotate(-7deg);
-  transition: transform 250ms ease;
-}
-
-/*
-  Dekorative gullhjørner over selve bilderammen.
-*/
-.couple-photo::before,
-.couple-photo::after {
-  position: absolute;
-  z-index: 2;
-
-  width: 34px;
-  height: 34px;
-
-  border-color: #b68b46;
-  border-style: solid;
-  content: "";
-
-  pointer-events: none;
-}
-
-.couple-photo::before {
-  top: 0.35rem;
-  left: 0.35rem;
-
-  border-width: 2px 0 0 2px;
-}
-
-.couple-photo::after {
-  right: 0.35rem;
-  bottom: 0.35rem;
-
-  border-width: 0 2px 2px 0;
-}
-
-.couple-photo img {
-  display: block;
-  width: 100%;
-  aspect-ratio: 3 / 4;
-  object-fit: cover;
-
-  /*
-    En tynn, varm kant rett rundt fotografiet.
-  */
-  border: 1px solid #d8c3a1;
-
-  /*
-    Gjør bildet litt varmere og mykere.
-    Du kan fjerne disse to linjene hvis du vil
-    beholde bildets helt originale farger.
-  */
-  filter: saturate(0.9) contrast(0.98);
-}
-
-/* Bildet retter seg litt opp når musen holdes over det */
-.couple-photo:hover {
-  transform: translateY(-42%) rotate(-3deg) scale(1.03);
-}
-
-
-/*
-  På mindre skjermer blir bildet mindre og flyttes nedover,
-  slik at det ikke dekker navnene i headeren.
-*/
-@media (max-width: 850px) {
-  .couple-photo {
-    top: auto;
-    bottom: 1.5rem;
-    left: 1.25rem;
-
-    width: 130px;
-
-    transform: rotate(-6deg);
-  }
-
-  .couple-photo:hover {
-    transform: rotate(-3deg) scale(1.03);
-  }
-}
-
-/*
-  Skjuler bildet på veldig små mobiler, siden headeren ellers
-  fort kan bli for tett. Fjern denne delen hvis du alltid vil
-  vise bildet.
-*/
-@media (max-width: 430px) {
-  .couple-photo {
-    display: none;
-  }
-}
-
-/*
-  Microsoft Forms innebygd i RSVP-seksjonen.
-
-  Wrapperen gir skjemaet en pen ramme som passer
-  med resten av bryllupssiden.
-*/
-.forms-wrapper {
-  position: relative;
-  overflow: hidden;
-
-  padding: 0.6rem;
-
-  background: linear-gradient(135deg, #f7e5df, #fffaf6, #ead6b5);
-  border: 1px solid #d5b06e;
-  border-radius: 14px;
-  box-shadow:
-    0 18px 45px rgba(70, 42, 43, 0.14),
-    0 0 0 5px rgba(255, 250, 246, 0.9);
-}
-
-/* Små dekorative gullhjørner */
-.forms-wrapper::before,
-.forms-wrapper::after {
-  position: absolute;
-  z-index: 2;
-
-  width: 38px;
-  height: 38px;
-
-  border-color: #b68b46;
-  border-style: solid;
-  content: "";
-
-  pointer-events: none;
-}
-
-.forms-wrapper::before {
-  top: 0.9rem;
-  left: 0.9rem;
-  border-width: 2px 0 0 2px;
-}
-
-.forms-wrapper::after {
-  right: 0.9rem;
-  bottom: 0.9rem;
-  border-width: 0 2px 2px 0;
-}
-
-
-/*
-  Selve Microsoft Forms-vinduet.
-
-  Høyden må være stor nok til at alle spørsmålene
-  får plass. Juster 850px opp eller ned etter at
-  du har testet skjemaet på nettsiden.
-*/
-.microsoft-form {
-  display: block;
-  width: 100%;
-  height: 1250px;
-
-  border: 0;
-  background: white;
-}
-
-/* Litt lavere høyde på mobil, om Forms tilpasser seg godt */
-@media (max-width: 650px) {
-  .microsoft-form {
-    height: 900px;
-  }
-}
-
-/*
-  På mobil skal informasjonskortene ligge ett under hverandre,
-  slik at de ikke gjør nettsiden bredere enn skjermen.
-*/
-@media (max-width: 650px) {
-  .info-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .info-card {
-    min-width: 0;
-  }
+  /* Flater */
+  --sage: #d1d4cd;          /* målt fra Canva-sidene */
+  --paper: #f7f3ea;
+  --raised: #fffdf8;
+  --forest: #3f4b38;
+  --envelope: #5d6e55;
+  --burgundy: #410013;
+  /* Tekst */
+  --brown: #4a2c0a;
+  --ink: #2b2118;
+  --muted: #6b6358;
+  --wine: #6b1a2e;
+  --on-dark: #f7f3ea;
+  /* Dekor */
+  --leaf: #4f6b53;
+  --sage-deep: #8fa08b;
+  --line: #ddd6c8;
+  --inset: #c9bfa9;
+  --inset-dark: #f7f3ea55;
+
+  --space-1: 4px; --space-2: 8px; --space-3: 16px; --space-4: 24px; --space-5: 40px; --space-6: 64px;
+  --radius-paper: 2px; --radius-sm: 6px; --radius-pill: 9999px;
+  --shadow-paper: 0 2px 4px #2b21180f, 0 8px 18px -4px #2b211826;
+  --shadow-lifted: 0 4px 8px #2b211814, 0 16px 30px -6px #2b211838;
+  --focus-ring: 0 0 0 3px var(--paper), 0 0 0 6px var(--leaf);
+
+  --font-script: "Great Vibes", "Snell Roundhand", cursive;
+  --font-caps: "Cormorant SC", "Cormorant Garamond", Georgia, serif;
+  --font-serif: "Cormorant Garamond", Georgia, serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+body { margin: 0; background: var(--paper); color: var(--ink); font: 400 19px/29px var(--font-serif); -webkit-font-smoothing: antialiased; }
+img { max-width: 100%; display: block; }
+h1, h2, h3, p, figure { margin: 0; }
+a { color: var(--wine); }
+.hidden { display: none; }
+.script { font-family: var(--font-script); font-weight: 400; }
+.eyebrow { font: 600 12px/16px var(--font-caps); letter-spacing: .24em; text-transform: uppercase; }
+
+.wrap { width: min(1080px, 100% - 32px); margin-inline: auto; }
+.narrow { width: min(640px, 100% - 32px); }
+
+/* ---------- Forside ---------- */
+.cover { position: relative; overflow: hidden; min-height: 100svh; background: var(--sage); color: var(--brown); display: grid; place-items: center; text-align: center; padding: var(--space-6) var(--space-3); }
+.bouquet { position: absolute; pointer-events: none; user-select: none; }
+.bouquet--tr { top: 0; right: 0; height: min(58vh, 520px); width: auto; }
+.bouquet--bl { bottom: 0; left: 0; height: min(42vh, 400px); width: auto; }
+.cover__inner { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; }
+.cover__names { font: 400 clamp(64px, 14vw, 128px)/1 var(--font-script); color: var(--brown); padding: 0 var(--space-3); }
+.cover__names .amp { font-size: .8em; }
+.cover__title { margin-top: var(--space-3); font: 600 clamp(16px, 2.4vw, 22px)/1.3 var(--font-caps); letter-spacing: .2em; text-transform: uppercase; }
+.cover__hint { margin-top: var(--space-5); font: 600 13px/18px var(--font-caps); letter-spacing: .2em; text-transform: uppercase; max-width: 24em; }
+
+/* Konvolutt */
+.env { position: relative; margin-top: var(--space-5); width: min(320px, 78vw); aspect-ratio: 320 / 210; border: 0; padding: 0; background: none; cursor: pointer; border-radius: var(--radius-paper); filter: drop-shadow(0 8px 14px #2b211829); perspective: 900px; }
+.env:focus-visible { outline: 2px solid transparent; box-shadow: var(--focus-ring); }
+.env__body { position: absolute; inset: 0; border-radius: var(--radius-paper); background: color-mix(in srgb, var(--envelope) 86%, #000); }
+.env__pocket { position: absolute; inset: auto 0 0 0; height: 100%; background: var(--envelope); clip-path: polygon(0 0, 50% 54%, 100% 0, 100% 100%, 0 100%); z-index: 2; border-radius: var(--radius-paper); }
+.env__flap { position: absolute; inset: 0 0 auto 0; height: 62%; background: color-mix(in srgb, var(--envelope) 92%, #000); clip-path: polygon(0 0, 100% 0, 50% 100%); transform-origin: top center; z-index: 3; transition: transform 800ms ease-in-out, z-index 0s 400ms; }
+.env__card { position: absolute; left: 8%; right: 8%; top: 8%; bottom: 8%; z-index: 1; background: var(--paper); border-radius: var(--radius-paper); color: var(--brown); display: grid; place-items: start center; padding-top: 10%; transition: transform 800ms ease-in-out 250ms; }
+.env__card .script { font-size: clamp(30px, 8vw, 40px); line-height: 1.1; }
+.seal { position: absolute; left: 50%; top: 62%; width: 96px; height: 96px; transform: translate(-50%, -50%); z-index: 4; filter: drop-shadow(0 3px 4px #3e0a1766); transition: opacity 300ms ease-out; }
+.env:hover .seal { transform: translate(-50%, -50%) scale(1.04); transition: transform 250ms ease-out; }
+.env.is-open .env__flap { transform: rotateX(180deg); z-index: 0; }
+.env.is-open .env__card { transform: translateY(-62%); }
+.env.is-open .seal { opacity: 0; }
+
+/* ---------- Seksjoner ---------- */
+.section { padding: var(--space-6) 0; }
+.section--paper { background: var(--paper); }
+.section--sage { background: var(--sage); padding: var(--space-6) 0 calc(var(--space-6) + 24px); }
+
+.heading { display: flex; flex-direction: column; align-items: center; text-align: center; color: var(--brown); margin-bottom: var(--space-3); }
+.heading__script { font-size: clamp(48px, 9vw, 64px); line-height: 1; }
+.heading__caps { font: 600 22px/28px var(--font-caps); letter-spacing: .2em; text-transform: uppercase; color: var(--wine); margin-top: var(--space-1); }
+.note { text-align: center; font-style: italic; font-size: 15px; line-height: 22px; color: var(--muted); margin-bottom: var(--space-5); }
+
+.divider { display: flex; align-items: center; gap: var(--space-3); width: 160px; margin: 0 auto; color: var(--sage-deep); }
+.divider::before, .divider::after { content: ""; flex: 1; height: 1px; background: currentColor; }
+.divider svg { width: 28px; height: 14px; flex: none; }
+
+/* ---------- Kollasje / Save the Date ---------- */
+.collage { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: var(--space-4); padding: var(--space-3) 0 var(--space-5); }
+.card { position: relative; width: 260px; padding: var(--space-5) var(--space-4); background: var(--raised); color: var(--brown); text-align: center; border-radius: var(--radius-paper); box-shadow: var(--shadow-paper); }
+.card::before { content: ""; position: absolute; inset: var(--space-2); border: 1px solid var(--inset); pointer-events: none; }
+.card--forest { background: var(--forest); color: var(--on-dark); }
+.card--forest::before { border-color: var(--inset-dark); }
+.card__script { font: 400 46px/1.1 var(--font-script); margin: var(--space-2) 0; }
+.card__caps { font: 600 15px/20px var(--font-caps); letter-spacing: .14em; text-transform: uppercase; margin-top: var(--space-3); }
+.card__line { font-style: italic; font-size: 15px; line-height: 22px; color: var(--muted); margin-top: var(--space-2); }
+.tilt-left { rotate: -3deg; }
+.tilt-slight { rotate: -1deg; }
+.tilt-right { rotate: 3deg; }
+
+.polaroid { width: 220px; padding: 12px 12px 48px; background: var(--raised); border-radius: var(--radius-paper); box-shadow: var(--shadow-paper); position: relative; }
+.polaroid img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; object-position: 50% 20%; }
+.polaroid figcaption { position: absolute; inset: auto 0 8px; text-align: center; font: 400 28px/30px var(--font-script); color: var(--brown); }
+
+.intro { text-align: center; max-width: 34em; }
+.lead { font-size: 22px; line-height: 32px; }
+.countdown { margin-top: var(--space-3); font: 600 15px/20px var(--font-caps); letter-spacing: .14em; text-transform: uppercase; color: var(--wine); }
+
+/* ---------- Program ---------- */
+.timeline { list-style: none; margin: 0; padding: 0; }
+.timeline li { display: grid; grid-template-columns: 76px 1fr; gap: var(--space-3); padding: var(--space-4) 0; border-top: 1px solid var(--line); }
+.timeline li:last-child { border-bottom: 1px solid var(--line); }
+.time { font: 600 18px/29px var(--font-caps); letter-spacing: .1em; color: var(--wine); }
+.timeline h3 { font: 600 17px/29px var(--font-caps); letter-spacing: .16em; text-transform: uppercase; color: var(--brown); }
+.timeline p { color: var(--ink); }
+
+/* ---------- Praktisk info ---------- */
+.info-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: var(--space-4); margin-top: var(--space-5); }
+.info { position: relative; background: var(--raised); border-top: 10px solid var(--leaf); border-radius: var(--radius-paper); box-shadow: var(--shadow-paper); padding: var(--space-4) var(--space-4) var(--space-5); display: flex; flex-direction: column; gap: var(--space-2); }
+.info .eyebrow { color: var(--leaf); }
+.info h3 { font: 600 20px/28px var(--font-caps); letter-spacing: .14em; text-transform: uppercase; color: var(--brown); }
+.info .btn { align-self: flex-start; margin-top: var(--space-2); }
+
+/* ---------- Knapper ---------- */
+.btn { display: inline-flex; align-items: center; justify-content: center; min-height: 48px; padding: 0 28px; border-radius: var(--radius-pill); border: 1.5px solid var(--wine); background: transparent; color: var(--wine); font: 600 15px/20px var(--font-caps); letter-spacing: .14em; text-transform: uppercase; text-decoration: none; cursor: pointer; transition: background-color 250ms ease-out, color 250ms ease-out, border-color 250ms ease-out; }
+.btn--primary { background: var(--burgundy); border-color: var(--burgundy); color: var(--on-dark); }
+.btn--primary:hover { background: var(--wine); border-color: var(--wine); }
+.btn--secondary:hover { background: var(--burgundy); border-color: var(--burgundy); color: var(--on-dark); }
+.btn--ghost { border-color: transparent; color: var(--leaf); text-decoration: underline; text-underline-offset: 5px; text-decoration-thickness: 1px; }
+.btn--block { width: 100%; margin-top: var(--space-4); }
+.btn:focus-visible { outline: 2px solid transparent; box-shadow: var(--focus-ring); }
+.btn[disabled] { opacity: .6; pointer-events: none; }
+
+/* ---------- RSVP ---------- */
+.rsvp { position: relative; background: var(--paper); border-left: 14px solid var(--burgundy); border-radius: var(--radius-paper); box-shadow: var(--shadow-paper); padding: var(--space-5) clamp(20px, 6vw, 56px); }
+.rsvp::before { content: ""; position: absolute; inset: var(--space-2); border: 1px solid var(--inset); pointer-events: none; }
+.rsvp form, .rsvp .thanks { position: relative; }
+.heading--card .heading__script { font-size: clamp(40px, 8vw, 52px); }
+.heading--card .heading__caps { font-size: 30px; line-height: 36px; color: var(--brown); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 6px; }
+
+.field { display: flex; flex-direction: column; gap: var(--space-2); margin: 0 0 var(--space-4); padding: 0; border: 0; min-width: 0; }
+.label { font: 600 15px/20px var(--font-caps); letter-spacing: .14em; text-transform: uppercase; color: var(--muted); padding: 0; }
+.input { font: inherit; font-size: 19px; line-height: 27px; min-height: 48px; width: 100%; padding: 10px 16px; border: 1.5px solid var(--line); border-radius: var(--radius-sm); background: var(--raised); color: var(--ink); }
+.input::placeholder { color: var(--muted); font-style: italic; opacity: .85; }
+.input:focus-visible { outline: 2px solid transparent; box-shadow: var(--focus-ring); border-color: var(--leaf); }
+.input[aria-invalid="true"] { border-color: var(--wine); }
+textarea.input { resize: vertical; }
+select.input { appearance: none; background-image: linear-gradient(45deg, transparent 50%, var(--muted) 50%), linear-gradient(135deg, var(--muted) 50%, transparent 50%); background-position: calc(100% - 22px) 50%, calc(100% - 16px) 50%; background-size: 6px 6px; background-repeat: no-repeat; }
+.hint { font-style: italic; font-size: 15px; line-height: 22px; color: var(--muted); }
+.error { font-style: italic; font-size: 15px; line-height: 22px; color: var(--wine); }
+.form-error { margin-top: var(--space-3); text-align: center; }
+
+.choice { display: flex; flex-wrap: wrap; gap: var(--space-2) var(--space-3); align-items: center; }
+.choice__opt { position: relative; }
+.choice__opt input { position: absolute; opacity: 0; inset: 0; margin: 0; cursor: pointer; }
+.choice__opt input:focus-visible + .btn { box-shadow: var(--focus-ring); }
+.choice__opt input:checked + .btn--secondary { background: var(--forest); border-color: var(--forest); color: var(--on-dark); }
+.choice__opt input:checked + .btn--ghost { color: var(--wine); text-decoration-thickness: 2px; }
+
+.if-yes { display: grid; grid-template-rows: 1fr; transition: grid-template-rows 250ms ease-out, opacity 250ms ease-out; }
+.if-yes > * { min-height: 0; }
+.if-yes.is-hidden { display: none; }
+
+.thanks { text-align: center; padding: var(--space-4) 0; color: var(--brown); }
+.thanks__script { font-size: 56px; line-height: 64px; margin-bottom: var(--space-2); }
+
+/* ---------- Bunn ---------- */
+.footer { background: var(--forest); color: var(--on-dark); text-align: center; padding: var(--space-5) var(--space-3) calc(var(--space-5) + env(safe-area-inset-bottom)); }
+.footer__names { font: 400 44px/1.1 var(--font-script); }
+.footer__date { margin-top: var(--space-2); font: 600 14px/20px var(--font-caps); letter-spacing: .3em; }
+
+/* ---------- Inn-toning ---------- */
+.js .reveal { opacity: 0; translate: 0 16px; transition: opacity 600ms ease-out, translate 600ms ease-out; }
+.js .reveal.is-visible { opacity: 1; translate: 0 0; }
+
+@media (max-width: 560px) {
+  body { font-size: 18px; line-height: 28px; }
+  .bouquet--tr { height: 34vh; }
+  .bouquet--bl { height: 26vh; }
+  .cover { padding-top: 22vh; padding-bottom: 18vh; place-items: start center; }
+  .collage { gap: var(--space-5); }
+  .timeline li { grid-template-columns: 64px 1fr; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .env__flap, .env__card, .btn, .seal { transition: none !important; }
+  .js .reveal { translate: none; transition: opacity 400ms ease-out; }
+}
+
+/* =====================================================
+   V2 – ANIMASJONER, LÅST FORSIDE OG MOBIL
+   ===================================================== */
+
+/* ---------- Låst forside: man må åpne konvolutten ---------- */
+.js .cover { position: fixed; inset: 0; z-index: 50; height: 100svh; min-height: 0; padding: 0 var(--space-3); place-items: center; touch-action: none; }
+.js.is-locked, .js.is-locked body { overflow: hidden; height: 100%; }
+.js.is-locked main, .js.is-locked .footer { visibility: hidden; }
+.cover.is-leaving { animation: coverOut 1200ms cubic-bezier(.7, 0, .2, 1) forwards; pointer-events: none; }
+.cover.is-gone { display: none; }
+@keyframes coverOut {
+  0%   { transform: translateY(0); opacity: 1; }
+  100% { transform: translateY(-105%); opacity: .6; }
+}
+
+/* ---------- Forsiden kommer inn ---------- */
+.js .cover__names { animation: write 1800ms cubic-bezier(.5, 0, .2, 1) 300ms both; }
+.js .cover__title { animation: fadeUp 900ms ease-out 1500ms both; }
+.js .env { animation: dropIn 1100ms cubic-bezier(.2, .9, .3, 1.2) 1800ms both, float 4s ease-in-out 3000ms infinite; }
+.js .cover__hint { animation: fadeUp 800ms ease-out 2600ms both, breathe 2.6s ease-in-out 3400ms infinite; }
+.js .bouquet--tr { transform-origin: top right; animation: inTR 1600ms cubic-bezier(.2, .8, .2, 1) both, swayTR 7s ease-in-out 1600ms infinite; }
+.js .bouquet--bl { transform-origin: bottom left; animation: inBL 1600ms cubic-bezier(.2, .8, .2, 1) 200ms both, swayBL 8s ease-in-out 1800ms infinite; }
+.js .seal { animation: glow 2.4s ease-in-out 3000ms infinite; }
+
+@keyframes write   { from { clip-path: inset(-20% 100% -20% 0); filter: blur(3px); } to { clip-path: inset(-20% 0 -20% 0); filter: blur(0); } }
+@keyframes fadeUp  { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
+@keyframes dropIn  { from { opacity: 0; transform: translateY(-60px) rotate(-8deg) scale(.9); } to { opacity: 1; transform: none; } }
+@keyframes float   { 0%, 100% { transform: translateY(0) rotate(0); } 50% { transform: translateY(-8px) rotate(-.6deg); } }
+@keyframes breathe { 0%, 100% { opacity: 1; } 50% { opacity: .45; } }
+@keyframes inTR    { from { opacity: 0; transform: translate(30%, -30%) rotate(8deg); } to { opacity: 1; transform: none; } }
+@keyframes inBL    { from { opacity: 0; transform: translate(-30%, 30%) rotate(-8deg); } to { opacity: 1; transform: none; } }
+@keyframes swayTR  { 0%, 100% { transform: rotate(0); } 50% { transform: rotate(-1.6deg); } }
+@keyframes swayBL  { 0%, 100% { transform: rotate(0); } 50% { transform: rotate(1.4deg); } }
+@keyframes glow    { 0%, 100% { filter: drop-shadow(0 3px 4px #3e0a1766); } 50% { filter: drop-shadow(0 0 14px #55161b99); } }
+
+/* ---------- Kronblader som daler ---------- */
+.petals { position: absolute; inset: 0; overflow: hidden; pointer-events: none; z-index: 0; }
+.petal { position: absolute; top: -40px; left: var(--x); width: var(--s); height: calc(var(--s) * 1.3); border-radius: 60% 0 60% 0; background: var(--c); opacity: .85; animation: fall var(--d) linear var(--delay) infinite; }
+@keyframes fall {
+  0%   { transform: translate(0, 0) rotate(0); }
+  50%  { transform: translate(var(--drift), 55svh) rotate(200deg); }
+  100% { transform: translate(calc(var(--drift) * -.5), 110svh) rotate(420deg); }
+}
+
+/* Utbrudd av kronblader når konvolutten åpnes og når RSVP sendes */
+.burst { position: fixed; z-index: 60; left: var(--ox); top: var(--oy); width: var(--s); height: calc(var(--s) * 1.3); border-radius: 60% 0 60% 0; background: var(--c); pointer-events: none; animation: burst var(--d) cubic-bezier(.1, .7, .3, 1) forwards; }
+@keyframes burst {
+  0%   { transform: translate(-50%, -50%) scale(.3) rotate(0); opacity: 1; }
+  100% { transform: translate(calc(-50% + var(--tx)), calc(-50% + var(--ty))) scale(1) rotate(var(--r)); opacity: 0; }
+}
+
+/* ---------- Konvolutten åpnes ---------- */
+.env.is-open { animation: none; }
+.env.is-open .seal { animation: sealPop 600ms cubic-bezier(.3, 0, .6, 1) forwards; transition: none; }
+.env.is-open .env__flap { transition-delay: 450ms; }
+.env.is-open .env__card { transform: translateY(-78%) scale(1.06); transition: transform 900ms cubic-bezier(.2, .8, .2, 1) 1000ms; }
+@keyframes sealPop {
+  0%   { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+  35%  { transform: translate(-50%, -50%) scale(1.25); opacity: 1; }
+  100% { transform: translate(-50%, 40%) scale(.4) rotate(-50deg); opacity: 0; }
+}
+.cover.is-opening .cover__hint { animation: none; opacity: 0; transition: opacity 300ms; }
+
+/* ---------- Innholdet etter åpning ---------- */
+.js .collage > * { opacity: 0; }
+.is-open .collage > * { animation: cardIn 1100ms cubic-bezier(.2, .8, .2, 1) both; }
+.is-open .collage > :nth-child(1) { animation-delay: 700ms; }
+.is-open .collage > :nth-child(2) { animation-delay: 900ms; }
+.is-open .collage > :nth-child(3) { animation-delay: 1100ms; }
+@keyframes cardIn { from { opacity: 0; translate: 0 160px; scale: .85; } to { opacity: 1; translate: 0 0; scale: 1; } }
+
+.js .polaroid img { filter: sepia(1) brightness(1.7) blur(6px); }
+.is-open .polaroid img { animation: develop 1200ms ease-out 800ms forwards; }
+@keyframes develop { to { filter: sepia(0) brightness(1) blur(0); } }
+
+.js .intro { opacity: 0; }
+.is-open .intro { animation: fadeUp 900ms ease-out 1600ms both; }
+
+/* Overskrifter skrives fram */
+.js .heading__script { clip-path: inset(-20% 100% -20% 0); }
+.heading.is-visible .heading__script, .is-visible .heading .heading__script { animation: write 1400ms cubic-bezier(.5, 0, .2, 1) 150ms forwards; }
+
+/* Programmet glir inn fra siden, linjene tegnes */
+.js .timeline li.reveal { translate: -40px 0; border-top-color: transparent; position: relative; }
+.timeline li::before { content: ""; position: absolute; left: 0; right: 0; top: -1px; height: 1px; background: var(--line); transform: scaleX(0); transform-origin: left; transition: transform 900ms ease-out 200ms; }
+.js .timeline li.is-visible { translate: 0 0; }
+.timeline li.is-visible::before { transform: scaleX(1); }
+.timeline .time { display: inline-block; }
+.timeline li.is-visible .time { animation: pop 600ms cubic-bezier(.3, 1.6, .5, 1) 300ms both; }
+@keyframes pop { from { opacity: 0; transform: scale(.6); } to { opacity: 1; transform: none; } }
+
+/* Infokortene vippes opp */
+.js .info.reveal { transform: perspective(900px) rotateX(-35deg); transform-origin: top center; transition: opacity 700ms ease-out, translate 700ms ease-out, transform 900ms cubic-bezier(.2, .8, .2, 1), box-shadow 250ms ease-out; }
+.js .info.reveal.is-visible { transform: none; }
+.info:hover { box-shadow: var(--shadow-lifted); }
+
+/* RSVP-kortet glir inn som et brev */
+.js .rsvp.reveal { translate: 0 80px; rotate: -2deg; transition: opacity 900ms ease-out, translate 900ms cubic-bezier(.2, .8, .2, 1), rotate 900ms cubic-bezier(.2, .8, .2, 1); }
+.js .rsvp.reveal.is-visible { translate: 0 0; rotate: 0deg; }
+.thanks:not([hidden]) .thanks__script { animation: write 1400ms cubic-bezier(.5, 0, .2, 1) both; }
+.thanks:not([hidden]) p:last-child { animation: fadeUp 800ms ease-out 900ms both; }
+
+/* Knappene får litt liv */
+.btn { transition: background-color 250ms ease-out, color 250ms ease-out, border-color 250ms ease-out, transform 200ms ease-out; }
+.btn:active { transform: scale(.96); }
+
+/* ---------- Mobil først ---------- */
+@media (max-width: 560px) {
+  .js .cover { place-items: center; padding: 0 var(--space-3); }
+  .cover__inner { padding-top: 6svh; }
+  .cover__names { font-size: clamp(58px, 17vw, 76px); }
+  .env { width: min(340px, 84vw); }
+  .bouquet--tr { height: 30svh; }
+  .bouquet--bl { height: 24svh; }
+  .section { padding: 48px 0; }
+  .collage { flex-direction: column; gap: var(--space-4); }
+  .collage .card, .collage .polaroid { width: min(280px, 80vw); }
+  .collage > :nth-child(2) { margin-top: -28px; }
+  .collage > :nth-child(3) { margin-top: -20px; }
+  .info-grid { gap: var(--space-3); }
+  .rsvp { border-left-width: 8px; }
+  .choice { flex-direction: column; align-items: stretch; }
+  .choice__opt .btn { width: 100%; }
+}
+
+/* ---------- Redusert bevegelse ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .js .cover__names, .js .cover__title, .js .env, .js .cover__hint, .js .bouquet--tr, .js .bouquet--bl, .js .seal,
+  .is-open .collage > *, .is-open .polaroid img, .heading .heading__script, .timeline .time { animation: none !important; opacity: 1; clip-path: none; filter: none; }
+  .petals, .burst { display: none; }
+  .cover.is-leaving { animation: fadeOut 500ms forwards; }
+  @keyframes fadeOut { to { opacity: 0; } }
+  .js .info.reveal, .js .rsvp.reveal, .js .timeline li.reveal { transform: none; translate: none; rotate: none; }
+}
+
+/* =====================================================
+   V3 – KORTKOLLASJE SOM I CANVA
+   ===================================================== */
+
+/* Ingen fallende kronblader på forsiden */
+.petals { display: none; }
+
+/* Invitasjonsdelen får samme salvia som Canva-siden */
+#invitasjon { background: #d4d9c6; padding-top: var(--space-5); }
+
+/* 1 enhet (--u) = 1 px i Canva-utkastet (620 px bredt). Alt skalerer med skjermbredden. */
+.kollasje-wrap { container-type: inline-size; width: min(100%, 560px); margin: 0 auto var(--space-5); }
+.kollasje { --u: calc(100cqw / 620); position: relative; height: calc(820 * var(--u)); }
+.k { position: absolute; margin: 0; }
+
+.k-env     { left: calc(110 * var(--u)); top: calc(5 * var(--u));   width: calc(390 * var(--u)); z-index: 1; }
+.k-navn    { left: calc(47 * var(--u));  top: calc(272 * var(--u)); width: calc(298 * var(--u)); height: calc(225 * var(--u)); z-index: 3; rotate: -.5deg; }
+.k-std     { left: calc(360 * var(--u)); top: calc(252 * var(--u)); width: calc(198 * var(--u)); height: calc(270 * var(--u)); z-index: 2; rotate: 4deg; }
+.k-blomst  { left: calc(252 * var(--u)); top: calc(572 * var(--u)); width: calc(93 * var(--u));  z-index: 2; }
+.k-rsvp    { left: calc(108 * var(--u)); top: calc(566 * var(--u)); width: calc(148 * var(--u)); height: calc(176 * var(--u)); z-index: 3; rotate: -4deg; }
+.k-segl    { left: calc(66 * var(--u));  top: calc(531 * var(--u)); width: calc(64 * var(--u));  z-index: 5; rotate: -12deg; filter: drop-shadow(0 3px 4px #3e0a1766); }
+.k-polaroid{ left: calc(345 * var(--u)); top: calc(563 * var(--u)); width: calc(172 * var(--u)); z-index: 4; rotate: 4deg; }
+.k-disk    { left: calc(261 * var(--u)); top: calc(708 * var(--u)); width: calc(100 * var(--u)); height: calc(100 * var(--u)); z-index: 6; }
+
+/* Papirkort */
+.k-navn, .k-std, .k-rsvp { box-sizing: border-box; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; border-radius: var(--radius-paper); box-shadow: var(--shadow-paper); text-decoration: none; }
+.k-navn::before, .k-std::before, .k-rsvp::before { content: ""; position: absolute; inset: calc(8 * var(--u)); border: 1px solid var(--inset); pointer-events: none; }
+
+.k-navn { background: var(--forest); color: var(--on-dark); }
+.k-navn::before { border-color: var(--inset-dark); }
+.k-navn__eyebrow { font: 600 max(10px, calc(13 * var(--u)))/1.2 var(--font-caps); letter-spacing: .2em; text-transform: uppercase; }
+.k-navn__script { font: 400 calc(52 * var(--u))/1.1 var(--font-script); margin-top: calc(14 * var(--u)); white-space: nowrap; }
+
+.k-std, .k-rsvp { background: var(--raised); color: var(--brown); }
+.k-std { justify-content: flex-start; padding: calc(40 * var(--u)) calc(22 * var(--u)) 0; gap: calc(9 * var(--u)); }
+.k-std__script { font: 400 calc(40 * var(--u))/1.05 var(--font-script); margin-bottom: calc(14 * var(--u)); }
+.k-std__linje { align-self: stretch; font: 600 max(9px, calc(12 * var(--u)))/1.6 var(--font-caps); letter-spacing: .14em; text-transform: uppercase; border-bottom: 1px solid #4a2c0a59; }
+
+.k-rsvp__lead { font: 400 calc(28 * var(--u))/1 var(--font-script); }
+.k-rsvp__word { font: 600 calc(40 * var(--u))/1.2 var(--font-caps); letter-spacing: .1em; text-transform: uppercase; }
+
+.k-polaroid { box-sizing: border-box; padding: calc(10 * var(--u)) calc(10 * var(--u)) calc(34 * var(--u)); background: var(--raised); border-radius: var(--radius-paper); box-shadow: var(--shadow-paper); }
+.k-polaroid img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; object-position: 50% 20%; }
+
+.k-disk { display: flex; flex-direction: column; align-items: center; justify-content: center; border-radius: 50%; background: var(--calla, #55161b); color: var(--on-dark); text-decoration: none; box-shadow: var(--shadow-paper); }
+.k-disk__caps { font: 600 max(8px, calc(11 * var(--u)))/1.2 var(--font-caps); letter-spacing: .18em; text-transform: uppercase; }
+.k-disk__script { font: 400 calc(28 * var(--u))/1.1 var(--font-script); }
+
+/* Klikkbare kort løftes litt */
+a.k { transition: transform 250ms ease-out, box-shadow 250ms ease-out, background-color 250ms ease-out; }
+a.k:hover { transform: translateY(-4px); box-shadow: var(--shadow-lifted); }
+.k-disk:hover { background: var(--wine); }
+a.k:focus-visible { outline: 2px solid transparent; box-shadow: var(--focus-ring); }
+
+/* ---------- Kortene glir ut av konvolutten ---------- */
+.js .k { opacity: 0; }
+.is-open .k { animation: kUt 1000ms cubic-bezier(.2, .8, .2, 1) both; }
+.is-open .k-env      { animation-name: kInn; animation-delay: 300ms; }
+.is-open .k-navn     { animation-delay: 800ms; }
+.is-open .k-std      { animation-delay: 950ms; }
+.is-open .k-rsvp     { animation-delay: 1100ms; }
+.is-open .k-polaroid { animation-delay: 1250ms; }
+.is-open .k-blomst   { animation-name: kInn; animation-delay: 1450ms; }
+.is-open .k-segl     { animation: stempel 700ms cubic-bezier(.3, 1.4, .5, 1) 1700ms both; }
+.is-open .k-disk     { animation: popp 700ms cubic-bezier(.3, 1.6, .5, 1) 1900ms both; }
+.js .k-polaroid img { filter: sepia(1) brightness(1.7) blur(6px); }
+.is-open .k-polaroid img { animation: develop 1200ms ease-out 1700ms forwards; }
+
+@keyframes kInn   { from { opacity: 0; translate: 0 -30px; } to { opacity: 1; translate: 0 0; } }
+@keyframes kUt    { from { opacity: 0; translate: 0 calc(-180 * var(--u)); scale: .6; } to { opacity: 1; translate: 0 0; scale: 1; } }
+@keyframes stempel{ 0% { opacity: 0; scale: 2.4; } 70% { opacity: 1; scale: .9; } 100% { opacity: 1; scale: 1; } }
+@keyframes popp   { from { opacity: 0; scale: 0; } to { opacity: 1; scale: 1; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .is-open .k, .is-open .k-segl, .is-open .k-disk, .is-open .k-polaroid img { animation: none !important; opacity: 1; filter: none; }
+}
+
+/* Kollasjen bruker hele skjermbredden på mobil */
+@media (max-width: 560px) {
+  .kollasje-wrap { width: 100vw; margin-inline: calc(50% - 50vw); }
 }

@@ -1,256 +1,213 @@
 <!doctype html>
-<html lang="no">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<html lang="nb">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Emilie &amp; Stig · 21. august 2027</title>
+<meta name="description" content="Emilie og Stig gifter seg 21. august 2027 i Lysgårdsbakkene på Lillehammer.">
+<meta name="theme-color" content="#d1d4cd">
+<link rel="preload" href="fonts/GreatVibes-Regular.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/CormorantSC-SemiBold.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
 
-    <title>Stig & Emilie — Bryllup</title>
-    <meta
-      name="description"
-      content="Informasjon og RSVP for bryllupet til Stig og Emilie."
-    />
+<!-- ============ FORSIDE ============ -->
+<header class="cover" id="top">
+  <img class="bouquet bouquet--tr" src="assets/bukett-burgunder.jpg" alt="">
+  <img class="bouquet bouquet--bl" src="assets/bukett-hvit.jpg" alt="">
 
-    <link rel="stylesheet" href="style.css">
-    <script src="script.js" defer></script>
-  </head>
+  <div class="cover__inner">
+    <h1 class="cover__names">Emilie <span class="amp">&amp;</span> Stig</h1>
+    <p class="cover__title">Vi skal gifte oss!</p>
 
-  <body>
-    <canvas id="fireworks-canvas" aria-hidden="true"></canvas>
-    <header class="hero" id="top">
-      <nav class="navigation container" aria-label="Hovedmeny">
-        <a class="logo" href="#top" aria-label="Til toppen">
-          S<span>&</span>E
-        </a>
+    <button class="env" type="button" id="envelope" aria-label="Åpne invitasjonen">
+      <span class="env__body"></span>
+      <span class="env__card"><span class="script">Du er invitert</span></span>
+      <span class="env__pocket"></span>
+      <span class="env__flap"></span>
+      <img class="seal seal--lg" src="assets/vokssegl.png" alt="">
+    </button>
 
-        <button
-          class="menu-button"
-          type="button"
-          aria-label="Åpne meny"
-          aria-controls="menu"
-          aria-expanded="false"
-        >
-          <span></span>
-          <span></span>
-          <span></span>
-        </button>
+    <p class="cover__hint">Trykk på konvolutten for å åpne</p>
+  </div>
+</header>
 
-        <div class="nav-links" id="menu">
-          <a href="#dagen">Dagen</a>
-          <a href="#praktisk">Praktisk info</a>
-          <a href="#rsvp">Svar på invitasjonen</a>
-        </div>
-      </nav>
+<main>
 
-      <figure class="couple-photo">
-        <img
-          src="bilder/stig-og-emilie.jpg"
-          alt="Stig og Emilie"
-        />
-      </figure>
-
-      <div class="hero-content container">
-        <p class="eyebrow">Vi gifter oss</p>
-
-        <!-- NAVN -->
-        <h1>Stig <span>&</span> Emilie </h1>
-
-        <!-- DATO OG STED -->
-        <p class="hero-date">Lørdag 14. august 2027</p>
-
-        <div class="ornament" aria-hidden="true">❦</div>
-
-        <p class="hero-location">
-          Camp Nou<br />
-          Barcelona
-        </p>
-
-        <a class="button button-light" href="#rsvp">Svar på invitasjonen</a>
-
-        <div class="countdown" aria-label="Nedtelling til bryllupet">
-          <div class="countdown-item">
-            <strong id="days">0</strong>
-            <span>dager</span>
-          </div>
-
-          <div class="countdown-item">
-            <strong id="hours">0</strong>
-            <span>timer</span>
-          </div>
-
-          <div class="countdown-item">
-            <strong id="minutes">0</strong>
-            <span>minutter</span>
-          </div>
-        </div>
+<!-- ============ SAVE THE DATE ============ -->
+<section class="section section--paper" id="invitasjon">
+  <div class="kollasje-wrap">
+    <div class="kollasje">
+      <img class="k k-env" src="assets/konvolutt.jpg" alt="">
+      <div class="k k-navn">
+        <p class="k-navn__eyebrow">Vi skal gifte oss</p>
+        <p class="k-navn__script">Emilie &amp; Stig</p>
       </div>
-
-      <a class="scroll-hint" href="#velkommen" aria-label="Gå til informasjon">
-        <span>Scroll ned</span>
-        <span class="scroll-arrow">↓</span>
+      <a class="k k-std" href="#program">
+        <span class="k-std__script">Save the<br>Date</span>
+        <span class="k-std__linje">21. august 2027</span>
+        <span class="k-std__linje">Lysgårdsbakkene</span>
+        <span class="k-std__linje">Lillehammer</span>
       </a>
-    </header>
+      <img class="k k-blomst" src="assets/blomsterklynge.jpg" alt="">
+      <a class="k k-rsvp" href="#rsvp">
+        <span class="k-rsvp__lead">Vennligst</span>
+        <span class="k-rsvp__word">RSVP</span>
+      </a>
+      <img class="k k-segl" src="assets/vokssegl.png" alt="">
+      <figure class="k k-polaroid">
+        <img src="assets/par-illustrasjon.jpg" alt="Akvarellillustrasjon av Emilie og Stig i bryllupsantrekk">
+      </figure>
+      <a class="k k-disk" href="#info">
+        <span class="k-disk__caps">Trykk for</span>
+        <span class="k-disk__script">Detaljer</span>
+      </a>
+    </div>
+  </div>
 
-    <main>
-      <section class="welcome section reveal" id="velkommen">
-        <div class="container narrow">
-          <p class="eyebrow dark">Kjære familie og venner</p>
+  <div class="wrap intro reveal">
+    <p class="lead">Vi gleder oss til å feire dagen vår sammen med deg – på toppen av Lillehammer, med utsikt over Mjøsa.</p>
+    <p class="countdown" id="countdown" aria-live="polite"></p>
+  </div>
+</section>
 
-          <h2>Vi gleder oss til å feire med dere</h2>
+<div class="divider" role="separator"><svg viewBox="0 0 28 14" aria-hidden="true"><path d="M14 1 L20 7 L14 13 L8 7 Z" fill="none" stroke="currentColor"/></svg></div>
 
-          <div class="ornament dark-ornament" aria-hidden="true">❦</div>
+<!-- ============ PROGRAM ============ -->
+<section class="section section--paper" id="program">
+  <div class="wrap narrow">
+    <h2 class="heading reveal"><span class="script heading__script">Program</span><span class="heading__caps">for dagen</span></h2>
+    <p class="note reveal">Foreløpig program – tidene kan endre seg.</p>
 
-          <p>
-            Endelig skal vi si ja til hverandre, og det hadde betydd enormt mye
-            for oss å ha dere med på dagen. Her finner dere praktisk
-            informasjon, program og et skjema for å svare på invitasjonen.
-          </p>
+    <ol class="timeline">
+      <li class="reveal"><span class="time">14.00</span><div><h3>Vielse</h3><p>Seremoni i Lysgårdsbakkene, med hoppbakken i ryggen.</p></div></li>
+      <li class="reveal"><span class="time">15.00</span><div><h3>Bobler og bilder</h3><p>Skål med brudeparet og fotografering.</p></div></li>
+      <li class="reveal"><span class="time">17.30</span><div><h3>Middag</h3><p>Middag, taler og god stemning.</p></div></li>
+      <li class="reveal"><span class="time">21.00</span><div><h3>Kake og første dans</h3><p>Deretter er dansegulvet åpent.</p></div></li>
+      <li class="reveal"><span class="time">01.00</span><div><h3>Takk for i dag</h3><p>Transport tilbake til sentrum.</p></div></li>
+    </ol>
+  </div>
+</section>
 
-          <p>
-            Vi håper på en dag fylt med latter, gode samtaler, fine taler og
-            dans langt utover kvelden.
-          </p>
-        </div>
-      </section>
+<div class="divider" role="separator"><svg viewBox="0 0 28 14" aria-hidden="true"><path d="M14 1 L20 7 L14 13 L8 7 Z" fill="none" stroke="currentColor"/></svg></div>
 
-      <section class="schedule section section-soft reveal" id="dagen">
-        <div class="container">
-          <div class="section-heading">
-            <p class="eyebrow dark">Bryllupsdagen</p>
-            <h2>Program</h2>
+<!-- ============ PRAKTISK INFO ============ -->
+<section class="section section--paper" id="info">
+  <div class="wrap">
+    <h2 class="heading reveal"><span class="script heading__script">Praktisk</span><span class="heading__caps">info</span></h2>
+
+    <div class="info-grid">
+      <article class="info reveal">
+        <p class="eyebrow">Sted</p>
+        <h3>Lysgårdsbakkene</h3>
+        <p>Hoppanlegget fra OL i 1994, rett over Lillehammer sentrum. Adresse og parkering kommer.</p>
+        <a class="btn btn--secondary" href="https://www.google.com/maps/search/?api=1&amp;query=Lysg%C3%A5rdsbakkene+Lillehammer" target="_blank" rel="noopener">Åpne kart</a>
+      </article>
+      <article class="info reveal">
+        <p class="eyebrow">Reise</p>
+        <h3>Til Lillehammer</h3>
+        <p>Toget fra Oslo S og Gardermoen går rett til Lillehammer. Vi kommer tilbake med informasjon om transport opp til bakken.</p>
+      </article>
+      <article class="info reveal">
+        <p class="eyebrow">Overnatting</p>
+        <h3>Hotell og rom</h3>
+        <p>Vi jobber med en avtale for gjestene. Mer info kommer – vent gjerne med å bestille.</p>
+      </article>
+      <article class="info reveal">
+        <p class="eyebrow">Antrekk</p>
+        <h3>Dresscode</h3>
+        <p>Kommer. Seremonien er utendørs, så ta med noe varmt til kvelden.</p>
+      </article>
+      <article class="info reveal">
+        <p class="eyebrow">Gaver</p>
+        <h3>Gaveønsker</h3>
+        <p>Det viktigste er at du kommer. Ønskeliste kommer.</p>
+      </article>
+      <article class="info reveal">
+        <p class="eyebrow">Spørsmål</p>
+        <h3>Ta kontakt</h3>
+        <p>Toastmaster og kontaktinfo kommer.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ RSVP ============ -->
+<section class="section section--sage" id="rsvp">
+  <div class="wrap narrow">
+    <div class="rsvp reveal">
+      <h2 class="heading heading--card"><span class="script heading__script">Vennligst</span><span class="heading__caps">RSVP</span></h2>
+      <p class="note">Svar innen 1. mai 2027</p>
+
+      <form name="rsvp" method="POST" action="/takk.html" data-netlify="true" netlify-honeypot="bot-field" id="rsvp-form" novalidate>
+        <input type="hidden" name="form-name" value="rsvp">
+        <p class="hidden"><label>Ikke fyll ut dette: <input name="bot-field"></label></p>
+
+        <label class="field">
+          <span class="label">Navn</span>
+          <input class="input" type="text" name="navn" autocomplete="name" required placeholder="Fornavn og etternavn">
+          <span class="error" hidden>Skriv inn navnet ditt.</span>
+        </label>
+
+        <fieldset class="field">
+          <legend class="label">Kommer du?</legend>
+          <div class="choice">
+            <label class="choice__opt"><input type="radio" name="kommer" value="Ja" required><span class="btn btn--secondary">Ja, jeg kommer</span></label>
+            <label class="choice__opt"><input type="radio" name="kommer" value="Nei"><span class="btn btn--ghost">Beklager, jeg kan ikke</span></label>
           </div>
+          <span class="error" hidden>Velg ett av svarene.</span>
+        </fieldset>
 
-          <div class="timeline">
-            <article class="timeline-item">
-              <time datetime="2027-08-14T14:00">14:00</time>
-              <div>
-                <h3>Vielse</h3>
-                <p>Sagrada Família</p>
-              </div>
-            </article>
+        <div class="if-yes" id="if-yes">
+          <label class="field">
+            <span class="label">Antall gjester</span>
+            <select class="input" name="antall">
+              <option>1</option><option>2</option><option>3</option><option>4</option>
+            </select>
+            <span class="hint">Deg selv medregnet.</span>
+          </label>
 
-            <article class="timeline-item">
-              <time datetime="2027-08-14T15:00">15:00</time>
-              <div>
-                <h3>Bobler og gratulasjoner</h3>
-                <p>Vi samles til mingling, bilder og noe godt i glasset.</p>
-              </div>
-            </article>
+          <label class="field">
+            <span class="label">Navn på følge</span>
+            <input class="input" type="text" name="folge" placeholder="Hvis du har med noen">
+          </label>
 
-            <article class="timeline-item">
-              <time datetime="2027-08-14T17:30">17:30</time>
-              <div>
-                <h3>Middag</h3>
-                <p>Festmiddag med taler, god mat og hyggelig selskap.</p>
-              </div>
-            </article>
+          <label class="field">
+            <span class="label">Allergier</span>
+            <input class="input" type="text" name="allergier" placeholder="Matallergier eller spesielle hensyn">
+          </label>
 
-            <article class="timeline-item">
-              <time datetime="2027-08-14T21:00">21:00</time>
-              <div>
-                <h3>Kake og fest</h3>
-                <p>Vi skjærer kaken — og dansegulvet åpner!</p>
-              </div>
-            </article>
-          </div>
+          <label class="field">
+            <span class="label">Sangønske</span>
+            <input class="input" type="text" name="sang" placeholder="Hva får deg ut på dansegulvet?">
+          </label>
         </div>
-      </section>
 
-      <section class="practical section reveal" id="praktisk">
-        <div class="container">
-          <div class="section-heading">
-            <p class="eyebrow dark">Alt du trenger å vite</p>
-            <h2>Praktisk informasjon</h2>
-          </div>
+        <label class="field">
+          <span class="label">Hilsen</span>
+          <textarea class="input" name="hilsen" rows="3" placeholder="Valgfritt"></textarea>
+        </label>
 
-          <div class="info-grid">
-            <article class="info-card">
-              <div class="info-icon" aria-hidden="true">⌂</div>
-              <h3>Sted</h3>
-              <p>
-                Camp Nou<br />
-                Carrer d'Arístides Maillol 12<br />
-                08028 Barcelona, Spania
-              </p>
+        <button class="btn btn--primary btn--block" type="submit">Svar på invitasjon</button>
+        <p class="error form-error" id="form-error" hidden>Noe gikk galt. Prøv igjen om litt.</p>
+      </form>
 
-              <a href="https://www.google.com/maps/place/Camp+Nou/@41.380896,2.1228198,17z" target="_blank" rel="noopener">Åpne i kart →</a>
-            </article>
-
-            <article class="info-card">
-              <div class="info-icon" aria-hidden="true">♢</div>
-              <h3>Dresskode</h3>
-              <p>
-                Pent antrekk / mørk dress.<br />
-                Vi ønsker at alle skal føle seg fine og komfortable.
-              </p>
-            </article>
-
-            <article class="info-card">
-              <div class="info-icon" aria-hidden="true">↗</div>
-              <h3>Transport</h3>
-              <p>
-                <!-- [Informasjon om parkering, kollektivtransport eller eventuell
-                felles transport.] --> Ville ikke kjørt bil om jeg var deg!
-              </p>
-            </article>
-
-            <article class="info-card">
-              <div class="info-icon" aria-hidden="true">♡</div>
-              <h3>Toastmaster</h3>
-              <p>
-                Har du spørsmål, eller ønsker du å holde tale? Ta kontakt med
-                Toastmasteren.
-              </p>
-
-              <!-- Bytt ut e-postadressen -->
-              <a href="mailto:toastmaster@eksempel.no">
-                toastmaster@eksempel.no →
-              </a>
-            </article>
-          </div>
-        </div>
-      </section>
-
-      <section class="quote-section section-soft reveal">
-        <div class="container narrow">
-          <blockquote>
-            <p>«Det beste med fremtiden er at vi møter den sammen.»</p>
-          </blockquote>
-        </div>
-      </section>
-
-      <section class="rsvp section reveal" id="rsvp">
-        <div class="container narrow">
-          <div class="section-heading">
-            <p class="eyebrow dark">Gi oss beskjed</p>
-            <h2>Svar på invitasjonen</h2>
-            <p class="section-intro">
-              Vi setter stor pris på om du svarer innen
-              <strong>1. januar 2027</strong>.
-            </p>
-          </div>
-
-          <div class="forms-wrapper">
-            <iframe
-              class="microsoft-form"
-              src="https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=DQSIkWdsW0yxEjajBLZtrQAAAAAAAAAAAAN__gyTKnZUQVJUU0MxRk5NWENWTVpHTDdYVTVST0hHRC4u&embed=true"
-              title="Svar på bryllupsinvitasjonen"
-              frameborder="0"
-              marginwidth="0"
-              marginheight="0"
-              allowfullscreen
-            >
-              Laster inn svarskjema ...
-            </iframe>
-        </div>
-        </div>
-      </section>
-    </main>
-
-    <footer class="footer">
-      <div class="container">
-        <p class="footer-names">Stig <span>&</span> Emilie </p>
-        <p>Vi gleder oss til å feire med dere ♡</p>
+      <div class="thanks" id="thanks" hidden tabindex="-1">
+        <p class="script thanks__script">Tusen takk!</p>
+        <p id="thanks-text">Vi har fått svaret ditt.</p>
       </div>
-    </footer>
-  </body>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="footer">
+  <p class="footer__names">Emilie &amp; Stig</p>
+  <p class="footer__date">21 · 08 · 2027</p>
+</footer>
+
+<script src="main.js"></script>
+</body>
 </html>
