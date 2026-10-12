@@ -163,12 +163,11 @@ button {
 
   /*
     Her kan du bruke et eget bilde:
-    1. Lag en mappe som heter "bilder"
-    2. Legg bildet der, for eksempel "hero.jpg"
-    3. Da brukes: url("bilder/hero.jpg")
+    1. Legg bildet i mappen "bilder", for eksempel "hero.jpg"
+    2. Legg inn denne linjen mellom linear-gradient og fargen:
+       url("bilder/hero.jpg") center / cover no-repeat,
 
-    Hvis du IKKE har noe bilde, vil fargen #805b5c
-    vises i stedet.
+    Uten bilde vises fargen #805b5c.
 
     Linear-gradient gjør bildet mørkere, slik at den
     hvite teksten blir lettere å lese.
@@ -179,7 +178,6 @@ button {
       #3f2728a8,
       rgba(119, 72, 78, 0.44)
     ),
-    url("bilder/hero.jpg") center / cover no-repeat,
     #805b5c;
 }
 
